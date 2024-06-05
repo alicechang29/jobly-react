@@ -17,8 +17,10 @@ function SearchForm({ handleSearch }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    console.log("SearchForm: handleSubmit", {term})
+
     handleSearch(term);
-    setTermData("");
+    setTerm("");
   }
 
   function handleChange(evt) {
