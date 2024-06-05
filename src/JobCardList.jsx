@@ -13,7 +13,7 @@ import JobCard from "./JobCard.jsx";
  *
  * Effects: none
  *
- * JobCardList -> [JobCard, JobCard]
+ * JobList -> { JobCardList }  -> [JobCard, JobCard]
  */
 
 function JobCardList({ jobs = [] }) {
