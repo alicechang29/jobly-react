@@ -65,6 +65,20 @@ class JoblyApi {
     const res = await this.request(`jobs/`);
     return res.jobs;
   }
+
+  /** Get jobs by search term
+   *
+   * term: "apple"
+   *
+   * returns all jobs with titles partially matching the term (case-insensitive)
+   * [ { id, title, salary, equity, companyHandle, companyName }, ...]
+  */
+
+  static async getJobsBySearch(term) {
+    const res = await this.request(`jobs/`, {title: term}, "GET");
+
+    return res.jobs;
+  }
 }
 
 export default JoblyApi;
