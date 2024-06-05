@@ -38,6 +38,7 @@ function CompanyList() {
   // add a to property for link
 
   //Make sure to pass the props
+
   return (
     <div className="CompanyList">
       Company List
