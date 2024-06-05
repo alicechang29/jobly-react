@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import JobCardList from "./JobCardList";
 import JoblyApi from "../api.js";
+import Error from "./Error.jsx";
 
 /**
  * Company Detail
@@ -34,13 +35,13 @@ function CompanyDetail() {
   const { handle } = useParams();
 
   const [companyData, setCompanyData] = useState({
-    company: null,
+    company: {},
     isLoading: true,
     errors: [],
   });
 
 
-  /**fetches company data by name on initial render */
+  /** fetches and sets company data by name on initial render */
   useEffect(function fetchCompanyByName() {
     console.log("USE EFFECT: fetchCompanyByName");
 
@@ -50,7 +51,7 @@ function CompanyDetail() {
         setCompanyData({
           company: data,
           isLoading: false,
-          errors: null,
+          errors: [],
         });
       } catch (err) {
         console.log({ err });
@@ -69,14 +70,8 @@ function CompanyDetail() {
     <div className="CompanyDetail">
       Company Detail
       {
-        companyData.errors &&
-        <div>
-          {companyData.errors.map(
-            err => (
-              <h1> 404: {err} </h1>
-            )
-          )}
-        </div>
+        companyData.errors.length > 0 &&
+        <Error errors={companyData.errors}/>
       }
       <JobCardList />
     </div>
