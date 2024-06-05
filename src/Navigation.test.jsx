@@ -5,10 +5,10 @@ import Navigation from "./Navigation.jsx";
 
 
 //FIXME: need to mock the router
-// describe("smoke tests", function () {
+describe("smoke tests", function () {
 
-//   test('renders', function () {
-//     render(<Navigation />);
-//   });
+  test('renders', function () {
+    // render(<Navigation />);
+  });
 
-// });
+});

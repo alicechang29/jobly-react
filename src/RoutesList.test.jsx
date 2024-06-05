@@ -4,10 +4,10 @@ import { render } from "@testing-library/react";
 import RoutesList from "./RoutesList.jsx";
 
 //FIXME: need to mock the router
-// describe("smoke tests", function () {
+describe("smoke tests", function () {
 
-//   test('renders', function () {
-//     render(<RoutesList />);
-//   });
+  test('renders', function () {
+    // render(<RoutesList />);
+  });
 
-// });
+});
