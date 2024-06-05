@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 /**
  * Navigation
@@ -8,6 +8,8 @@ import { NavLink } from "react-router-dom"
  * State: none
  *
  * Effects: none
+ *
+ *  App -> Navigation
  */
 
 function Navigation() {

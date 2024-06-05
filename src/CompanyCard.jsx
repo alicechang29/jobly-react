@@ -7,6 +7,8 @@
  * State: none
  *
  * Effects: none
+ *
+ * App -> RoutesList -> CompanyList -> CompanyCard
  */
 
 function CompanyCard({ company }) {

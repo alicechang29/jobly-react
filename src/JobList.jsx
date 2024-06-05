@@ -14,20 +14,22 @@ import { useEffect, useState } from "react";
  *  default: {jobs: null, isLoading: true}
  *
  * Effects: fetch and set jobs on first initiation
+ *
+ *  App -> RoutesList -> JobList
  */
 
 function JobList() {
   console.log("JobList");
-  const [jobs, setJobs ] = useState({jobs: null, isLoading: true});
+  const [jobs, setJobs] = useState({ jobs: null, isLoading: true });
 
   /** Sets the filtered jobs */
   function handleSearch() {
     // fetch jobs by search
   }
 
-  useEffect(function fetchAllJobs(){
+  useEffect(function fetchAllJobs() {
 
-    async function getJobs(){
+    async function getJobs() {
       // fetch get jobs
       // set({jobs, isLoading: false})
     }

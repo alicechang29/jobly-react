@@ -2,11 +2,13 @@
 /**
  * Homepage
  *
- * Props:
+ * Props: None
  *
- * State:
+ * State: None
  *
- * Effects:
+ * Effects: None
+ *
+ * App -> RoutesList -> Homepage
  */
 
 function Homepage() {

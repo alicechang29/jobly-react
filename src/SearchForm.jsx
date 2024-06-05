@@ -7,6 +7,8 @@
  * State: search term
  *
  * Effects:
+ *
+ * App -> RoutesList -> CompanyList/JobList -> SearchForm
  */
 
 function SearchForm({ handleSearch }) {

@@ -3,16 +3,18 @@
  * Job Card
  *
  * Props:
- * job -> { title, salary, equity, companyHandle }
+ * job -> { id, title, salary, equity, companyHandle }
  *
  * State: none
  *
  * Effects: none
+ *
+ * App -> RoutesList -> JobList/CompanyDetail -> JobCardList -> JobCard
  */
 
 function JobCard({ job }) {
   console.log("JobCard");
-  const { title, salary = null , equity= null, companyHandle = null } = job;
+  const { title, salary = null, equity = null, companyHandle = null } = job;
 
   return (
     <div className="JobCard">

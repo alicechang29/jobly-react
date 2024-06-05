@@ -12,6 +12,8 @@ import Homepage from "./Homepage.jsx";
  * State: none
  *
  * Effects: none
+ *
+ *  App -> RoutesList
  */
 
 function RoutesList() {
@@ -20,7 +22,7 @@ function RoutesList() {
   return (
     <div className="RoutesList">
       <Routes>
-      <Route
+        <Route
           path=""
           element={<Homepage />}
         />

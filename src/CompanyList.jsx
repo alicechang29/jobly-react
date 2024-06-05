@@ -19,7 +19,9 @@ import SearchForm from "./SearchForm";
     isLoading
   }
  *
- * Effects: fetch and set companies on first initiation []
+ * Effects: fetch and set companies on first initiation
+ *
+ * App -> RoutesList -> CompanyList
  */
 
 function CompanyList() {
