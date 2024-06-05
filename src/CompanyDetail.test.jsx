@@ -1,4 +1,4 @@
-import { expect, test, vi, beforeAll, afterEach, afterAll } from "vitest";
+import { describe, expect, test, vi, beforeAll, afterEach, afterAll } from "vitest";
 
 import { render } from "@testing-library/react";
 import CompanyDetail from "./CompanyDetail.jsx";

@@ -2,15 +2,18 @@
 /**
  * SearchForm
  *
- * Props:
+ * Props: handleSearch
  *
- * State:
+ * State: search term
  *
  * Effects:
  */
 
-function SearchForm() {
+function SearchForm({ handleSearch }) {
   console.log("SearchForm");
+  //state: term
+  //handleChange fn
+  //handleSubmit fn
 
   return (
     <div className="SearchForm">

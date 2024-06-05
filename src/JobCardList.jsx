@@ -1,22 +1,22 @@
+import
+  /**
+   * Job Card List
+   *
+   * Props:
+   *
+   * State:
+   *
+   * Effects:
+   */
 
-/**
- * Job Card List
- *
- * Props:
- *
- * State:
- *
- * Effects:
- */
+  function JobCardList() {
+    console.log("JobCardList");
 
-function JobCardList() {
-  console.log("JobCardList");
+    return (
+      <div className="JobCardList">
 
-  return (
-    <div className="JobCardList">
-
-    </div>
-  );
-}
+      </div>
+    );
+  };
 
 export default JobCardList;

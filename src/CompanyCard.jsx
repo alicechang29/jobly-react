@@ -2,19 +2,19 @@
 /**
  * Company Card
  *
- * Props:
+ * Props: company
  *
- * State:
+ * State: none
  *
- * Effects:
+ * Effects: none
  */
 
-function CompanyCard() {
+function CompanyCard({ company }) {
   console.log("CompanyCard");
 
   return (
     <div className="CompanyCard">
-
+      CompanyCard
     </div>
   );
 }
