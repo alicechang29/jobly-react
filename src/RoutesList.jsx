@@ -21,7 +21,7 @@ function RoutesList() {
     <div className="RoutesList">
       <Routes>
       <Route
-          path="/"
+          path=""
           element={<Homepage />}
         />
         <Route
