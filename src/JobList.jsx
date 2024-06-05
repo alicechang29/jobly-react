@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
  *
  * Effects: fetch and set jobs on first initiation
  *
- *  App -> RoutesList -> JobList
+ *  RoutesList -> { JobList } -> JobCardList
  */
 
 function JobList() {
@@ -26,13 +26,14 @@ function JobList() {
     {
       jobs: [],
       isLoading: true,
-      errors: [],
+      isSearch: false,
+      errors: []
     }
   );
 
   /** Sets the filtered jobs */
   function handleSearch(term) {
-    console.log("handleSearch", {term});
+    console.log("handleSearch", { term });
 
     async function fetchJobsBySearch() {
       console.log("fetchJobsBySearch");
@@ -42,12 +43,15 @@ function JobList() {
         setJobs({
           jobs: data,
           isLoading: false,
-          errors: [],
+          searchTerm: term,
+          errors: []
+
         });
       } catch (err) {
         setJobs({
           jobs: [],
           isLoading: false,
+          searchTerm: "",
           errors: err,
         });
       }
@@ -66,12 +70,14 @@ function JobList() {
         setJobs({
           jobs: data,
           isLoading: false,
+          isSearch: false,
           errors: [],
         });
       } catch (err) {
         setJobs({
           jobs: [],
           isLoading: false,
+          isSearch: false,
           errors: err,
         });
       }
@@ -82,12 +88,16 @@ function JobList() {
 
   return (
     <div className="JobList">
-      <h1>All Jobs</h1>
+      {isSearch
+        ? <h1>All Jobs</h1>
+        : <h1>Search results for {term}</h1>
+      }
+
       {
         jobsData.errors.length > 0 &&
         <Error errors={jobsData.errors} />
       }
-      <SearchForm handleSearch={handleSearch}/>
+      <SearchForm handleSearch={handleSearch} />
       <JobCardList jobs={jobsData.jobs} />
     </div>
   );
