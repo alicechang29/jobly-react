@@ -1,21 +1,30 @@
+import { NavLink } from "react-router-dom"
 
 /**
  * Navigation
  *
- * Props:
+ * Props: none
  *
- * State:
+ * State: none
  *
- * Effects:
+ * Effects: none
  */
 
 function Navigation() {
   console.log("Navigation");
 
   return (
-    <div className="Navigation">
-
-    </div>
+    <nav className="Navigation">
+      <NavLink to="" end>
+        Jobly
+      </NavLink>
+      <NavLink to="/companies" end>
+        Companies
+      </NavLink>
+      <NavLink to="/jobs" end>
+        jobs
+      </NavLink>
+    </nav>
   );
 }
 
