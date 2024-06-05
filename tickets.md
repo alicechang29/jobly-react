@@ -7,3 +7,9 @@
 4. RoutesList - fix "*" for Navigate to - DONE
 
 5. JobCard.jsx - need to pass in company Name instead of companyHandle
+
+
+
+
+# LEARNING
+For search forms, can keep the state of the input and not clear it out

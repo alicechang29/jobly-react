@@ -40,12 +40,16 @@ function JobList() {
 
       try {
         const data = await JoblyApi.getJobsBySearch(term);
+
+        const errors = data.length === 0
+          ? ["Sorry, no results were found!"]
+          : [];
+
         setJobs({
           jobs: data,
           isLoading: false,
           searchTerm: term,
-          errors: []
-
+          errors,
         });
       } catch (err) {
         setJobs({
@@ -70,14 +74,14 @@ function JobList() {
         setJobs({
           jobs: data,
           isLoading: false,
-          isSearch: false,
+          searchTerm: "",
           errors: [],
         });
       } catch (err) {
         setJobs({
           jobs: [],
           isLoading: false,
-          isSearch: false,
+          searchTerm: "",
           errors: err,
         });
       }
@@ -88,16 +92,17 @@ function JobList() {
 
   return (
     <div className="JobList">
-      {isSearch
+      <SearchForm handleSearch={handleSearch} />
+      {jobsData.searchTerm === ""
         ? <h1>All Jobs</h1>
-        : <h1>Search results for {term}</h1>
+        : <h1>Search results for "{jobsData.searchTerm}"</h1>
       }
 
       {
         jobsData.errors.length > 0 &&
-        <Error errors={jobsData.errors} />
+        <div><Error errors={jobsData.errors} /></div>
       }
-      <SearchForm handleSearch={handleSearch} />
+
       <JobCardList jobs={jobsData.jobs} />
     </div>
   );
