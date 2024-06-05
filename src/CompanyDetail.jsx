@@ -9,7 +9,7 @@ import JoblyApi from "../api.js";
  * Props: None
  *
  * State: company
- {
+ companyData ->{
     company:
      {
         handle,
@@ -19,23 +19,24 @@ import JoblyApi from "../api.js";
         logoUrl,
         jobs:  [{ id, title, salary, equity }, ...]
      },
-    isLoading
+    isLoading: bool,
+    errors: [],
   }
 
  * Effects: fetch and set company on first initiation
 
  *  App -> RoutesList -> CompanyDetail
 
-
  */
 
 function CompanyDetail() {
   console.log("CompanyDetail");
-  //FIXME: missing useParams
+  const { handle } = useParams();
 
   const [companyData, setCompanyData] = useState({
     company: null,
-    isLoading: true
+    isLoading: true,
+    errors: [],
   });
 
 
@@ -44,15 +45,38 @@ function CompanyDetail() {
     console.log("USE EFFECT: fetchCompanyByName");
 
     async function fetchCompanyData() {
-      const data = await JoblyApi.getCompany();
-      setCompanyData({ company: data, isLoading: false });
+      try {
+        const data = await JoblyApi.getCompany(handle);
+        setCompanyData({
+          company: data,
+          isLoading: false,
+          errors: null,
+        });
+      } catch (err) {
+        console.log({err})
+        setCompanyData({
+          company: null,
+          isLoading: false,
+          errors: err,
+        })
+      }
     }
+
     fetchCompanyData();
   }, []);
 
-
   return (
     <div className="CompanyDetail">
+      {
+      companyData.errors &&
+      <div>
+        {companyData.errors.map(
+          err => (
+            <h1> 404: {err} </h1>
+          )
+        )}
+      </div>
+      }
       <JobCardList />
     </div>
   );
