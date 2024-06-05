@@ -6,3 +6,4 @@
 
 4. RoutesList - fix "*" for Navigate to - DONE
 
+5. JobCard.jsx - need to pass in company Name instead of companyHandle
