@@ -35,7 +35,7 @@ function RoutesList() {
           element={<CompanyList />}
         />
         <Route
-          path="/companies/:name"
+          path="/companies/:handle"
           element={<CompanyDetail />}
         />
         <Route
