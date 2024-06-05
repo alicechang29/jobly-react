@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router-dom";
 import JobList from "./JobList.jsx";
 import CompanyList from "./CompanyList.jsx";
 import CompanyDetail from "./CompanyDetail.jsx";
@@ -23,7 +23,7 @@ function RoutesList() {
     <div className="RoutesList">
       <Routes>
         <Route
-          path=""
+          path="/"
           element={<Homepage />}
         />
         <Route
@@ -39,8 +39,8 @@ function RoutesList() {
           element={<CompanyDetail />}
         />
         <Route
-          path="*"
-          element={<Homepage />}
+          path="/*"
+          element={<Navigate to="/" />}
         />
       </Routes>
     </div>
