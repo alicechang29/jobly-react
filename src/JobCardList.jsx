@@ -12,6 +12,8 @@ import JobCard from "./JobCard.jsx";
  * State: none
  *
  * Effects: none
+ *
+ * JobCardList -> [JobCard, JobCard]
  */
 
 function JobCardList({ jobs = []}) {

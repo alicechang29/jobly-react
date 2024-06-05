@@ -3,18 +3,20 @@
  * Job Card
  *
  * Props:
+ * job -> { title, salary, equity, companyHandle }
  *
- * State:
+ * State: none
  *
- * Effects:
+ * Effects: none
  */
 
-function JobCard() {
+function JobCard({ job }) {
   console.log("JobCard");
+  const { title, salary = null , equity= null, companyHandle = null } = job;
 
   return (
     <div className="JobCard">
-
+      JobCard
     </div>
   );
 }
