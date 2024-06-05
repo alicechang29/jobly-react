@@ -19,7 +19,7 @@ function SearchForm({ handleSearch }) {
 
   return (
     <div className="SearchForm">
-
+      Search Bar
     </div>
   );
 }

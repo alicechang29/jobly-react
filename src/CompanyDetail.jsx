@@ -53,12 +53,12 @@ function CompanyDetail() {
           errors: null,
         });
       } catch (err) {
-        console.log({err})
+        console.log({ err });
         setCompanyData({
           company: null,
           isLoading: false,
           errors: err,
-        })
+        });
       }
     }
 
@@ -67,15 +67,16 @@ function CompanyDetail() {
 
   return (
     <div className="CompanyDetail">
+      Company Detail
       {
-      companyData.errors &&
-      <div>
-        {companyData.errors.map(
-          err => (
-            <h1> 404: {err} </h1>
-          )
-        )}
-      </div>
+        companyData.errors &&
+        <div>
+          {companyData.errors.map(
+            err => (
+              <h1> 404: {err} </h1>
+            )
+          )}
+        </div>
       }
       <JobCardList />
     </div>

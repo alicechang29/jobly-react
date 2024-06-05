@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
+import { Link } from "react-router-dom";
 /**
  * Company List
  *
@@ -33,12 +34,16 @@ function CompanyList() {
 
   //handleSearch fn
 
+  // need make a map for companylist
+  // add a to property for link
+
   //Make sure to pass the props
   return (
     <div className="CompanyList">
+      Company List
       <SearchForm />
-      <CompanyCard />
-    </div>
+      <Link to="http://localhost:5174/companies/anderson-arias-morrow"><CompanyCard /></Link>
+    </div >
   );
 
 
