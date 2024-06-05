@@ -1,22 +1,31 @@
-import
-  /**
-   * Job Card List
-   *
-   * Props:
-   *
-   * State:
-   *
-   * Effects:
-   */
+import JobCard from "./JobCard.jsx";
 
-  function JobCardList() {
-    console.log("JobCardList");
+/**
+ * Job Card List
+ *
+ * Props:
+ jobs
+  {
+    jobs: [job,...]
+  }
+ *
+ * State: none
+ *
+ * Effects: none
+ */
 
-    return (
-      <div className="JobCardList">
+function JobCardList({ jobs = []}) {
+  console.log("JobCardList");
 
-      </div>
-    );
-  };
+  return (
+    <div className="JobCardList">
+      {jobs.map(
+        job => (
+          <JobCard key={job.id}/>
+        )
+      )}
+    </div>
+  );
+};
 
 export default JobCardList;
