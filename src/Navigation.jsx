@@ -25,7 +25,7 @@ function Navigation() {
         Companies
       </NavLink>
       <NavLink to="/jobs" end>
-        jobs
+        Jobs
       </NavLink>
     </nav>
   );
