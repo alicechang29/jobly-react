@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import JobCardList from "./JobCardList";
+import JoblyApi from "../api.js";
 
 /**
  * Company Detail
@@ -22,12 +23,32 @@ import JobCardList from "./JobCardList";
   }
 
  * Effects: fetch and set company on first initiation
+
+ *  App -> RoutesList -> CompanyDetail
+
+
  */
 
 function CompanyDetail() {
   console.log("CompanyDetail");
-  //useParams
-  //useEffect
+  //FIXME: missing useParams
+
+  const [companyData, setCompanyData] = useState({
+    company: null,
+    isLoading: true
+  });
+
+
+  /**fetches company data by name on initial render */
+  useEffect(function fetchCompanyByName() {
+    console.log("USE EFFECT: fetchCompanyByName");
+
+    async function fetchCompanyData() {
+      const data = await JoblyApi.getCompany();
+      setCompanyData({ company: data, isLoading: false });
+    }
+    fetchCompanyData();
+  }, []);
 
 
   return (
