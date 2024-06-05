@@ -22,47 +22,42 @@ import { useEffect, useState } from "react";
 
 function JobList() {
   console.log("JobList");
-  const [jobsData, setJobs] = useState(
+  const [jobsData, setJobsData] = useState(
     {
       jobs: [],
       isLoading: true,
-      isSearch: false,
+      searchTerm: "",
       errors: []
     }
   );
 
-  /** Sets the filtered jobs */
-  function handleSearch(term) {
+  /** Sets and fetches the filtered jobs */
+  async function handleSearch(term) {
     console.log("handleSearch", { term });
 
-    async function fetchJobsBySearch() {
-      console.log("fetchJobsBySearch");
+    try {
+      const data = await JoblyApi.getJobsBySearch(term);
 
-      try {
-        const data = await JoblyApi.getJobsBySearch(term);
+      const errors = data.length === 0
+        ? ["Sorry, no results were found!"]
+        : [];
 
-        const errors = data.length === 0
-          ? ["Sorry, no results were found!"]
-          : [];
-
-        setJobs({
-          jobs: data,
-          isLoading: false,
-          searchTerm: term,
-          errors,
-        });
-      } catch (err) {
-        setJobs({
-          jobs: [],
-          isLoading: false,
-          searchTerm: "",
-          errors: err,
-        });
-      }
+      setJobsData({
+        jobs: data,
+        isLoading: false,
+        searchTerm: term,
+        errors,
+      });
+    } catch (err) {
+      setJobsData({
+        jobs: [],
+        isLoading: false,
+        searchTerm: "",
+        errors: err,
+      });
     }
-
-    fetchJobsBySearch();
   }
+
 
   /** fetches and sets all jobs data on initial render */
   useEffect(function fetchAllJobs() {
@@ -71,14 +66,14 @@ function JobList() {
     async function fetchJobsData() {
       try {
         const data = await JoblyApi.getJobs();
-        setJobs({
+        setJobsData({
           jobs: data,
           isLoading: false,
           searchTerm: "",
           errors: [],
         });
       } catch (err) {
-        setJobs({
+        setJobsData({
           jobs: [],
           isLoading: false,
           searchTerm: "",
