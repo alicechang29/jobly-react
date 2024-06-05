@@ -32,11 +32,13 @@ function JobList() {
 
   /** Sets the filtered jobs */
   function handleSearch(term) {
-    // fetch jobs by search
+    console.log("handleSearch", {term});
 
     async function fetchJobsBySearch() {
+      console.log("fetchJobsBySearch");
+
       try {
-        const data = await JoblyApi.getJobs(); //FIXME: need to change the route
+        const data = await JoblyApi.getJobsBySearch(term);
         setJobs({
           jobs: data,
           isLoading: false,
@@ -44,7 +46,7 @@ function JobList() {
         });
       } catch (err) {
         setJobs({
-          jobs: null,
+          jobs: [],
           isLoading: false,
           errors: err,
         });
@@ -68,7 +70,7 @@ function JobList() {
         });
       } catch (err) {
         setJobs({
-          jobs: null,
+          jobs: [],
           isLoading: false,
           errors: err,
         });
@@ -85,7 +87,7 @@ function JobList() {
         jobsData.errors.length > 0 &&
         <Error errors={jobsData.errors} />
       }
-      <SearchForm />
+      <SearchForm handleSearch={handleSearch}/>
       <JobCardList jobs={jobsData.jobs} />
     </div>
   );
