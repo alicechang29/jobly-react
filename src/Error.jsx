@@ -20,7 +20,7 @@ function Error({ errors = [] }) {
         <div>
           {errors.map(
             err => (
-              <h1> 404: {err} </h1>
+              <h1> {err} </h1>
             )
           )}
         </div>
