@@ -1,7 +1,7 @@
 
 import { BrowserRouter } from "react-router-dom";
 
-import RouteList from "./RouteList.jsx";
+import RoutesList from "./RoutesList.jsx";
 import Navigation from "./Navigation.jsx";
 
 /**
@@ -12,9 +12,13 @@ import Navigation from "./Navigation.jsx";
 function App() {
 
   return (
-  <div className="App">
-
-  </div>)
+    <div className="App">
+      <BrowserRouter>
+        <Navigation />
+        <RoutesList />
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
