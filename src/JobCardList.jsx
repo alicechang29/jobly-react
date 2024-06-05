@@ -16,12 +16,11 @@ import JobCard from "./JobCard.jsx";
  * JobCardList -> [JobCard, JobCard]
  */
 
-function JobCardList({ jobs = [{ id: 1, title: "teacher" }] }) {
+function JobCardList({ jobs = [] }) {
   console.log("JobCardList");
 
   return (
     <div className="JobCardList">
-      Jobs Card List
       {jobs.map(
         job => (
           <JobCard key={job.id} job={job} />
