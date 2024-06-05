@@ -42,7 +42,7 @@ function CompanyList() {
     <div className="CompanyList">
       Company List
       <SearchForm />
-      <Link to="http://localhost:5174/companies/anderson-arias-morrow"><CompanyCard /></Link>
+      <Link to="http://localhost:5173/companies/anderson-arias-morrow"><CompanyCard /></Link>
     </div >
   );
 
