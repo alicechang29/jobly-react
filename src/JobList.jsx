@@ -31,13 +31,32 @@ function JobList() {
   );
 
   /** Sets the filtered jobs */
-  function handleSearch() {
+  function handleSearch(term) {
     // fetch jobs by search
+
+    async function fetchJobsBySearch() {
+      try {
+        const data = await JoblyApi.getJobs(); //FIXME: need to change the route
+        setJobs({
+          jobs: data,
+          isLoading: false,
+          errors: [],
+        });
+      } catch (err) {
+        setJobs({
+          jobs: null,
+          isLoading: false,
+          errors: err,
+        });
+      }
+    }
+
+    fetchJobsBySearch();
   }
 
   /** fetches and sets all jobs data on initial render */
   useEffect(function fetchAllJobs() {
-    console.log("USE EFFECT: fetchAllJobs")
+    console.log("USE EFFECT: fetchAllJobs");
 
     async function fetchJobsData() {
       try {
@@ -64,10 +83,10 @@ function JobList() {
       <h1>All Jobs</h1>
       {
         jobsData.errors.length > 0 &&
-        <Error errors={jobsData.errors}/>
+        <Error errors={jobsData.errors} />
       }
       <SearchForm />
-      <JobCardList jobs={jobsData.jobs}/>
+      <JobCardList jobs={jobsData.jobs} />
     </div>
   );
 }

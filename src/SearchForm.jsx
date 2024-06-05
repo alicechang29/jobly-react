@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 /**
  * SearchForm
  *
@@ -13,14 +13,29 @@
 
 function SearchForm({ handleSearch }) {
   console.log("SearchForm");
-  //state: term
-  //handleChange fn
-  //handleSubmit fn
+  const [term, setTerm] = useState("");
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    handleSearch(term);
+    setTermData("");
+  }
+
+  function handleChange(evt) {
+    setTerm(evt.target.value);
+  }
 
   return (
-    <div className="SearchForm">
-      Search Bar
-    </div>
+    <form className="SearchForm" onSubmit={handleSubmit}>
+      <label htmlFor="SearchForm"></label>
+      <input
+        id="SearchForm-value"
+        value={term}
+        onChange={handleChange}
+        placeholder="Enter Search Term..."
+      />
+      <button>Search!</button>
+    </form>
   );
 }
 
