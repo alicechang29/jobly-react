@@ -36,7 +36,9 @@ function JobList() {
     console.log("handleSearch", { term });
 
     try {
-      const data = await JoblyApi.getJobsBySearch(term);
+      const data = term !== ""
+      ? await JoblyApi.getJobsBySearch(term)
+      : await JoblyApi.getJobs()
 
       const errors = data.length === 0
         ? ["Sorry, no results were found!"]

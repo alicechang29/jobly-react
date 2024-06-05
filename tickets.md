@@ -8,7 +8,7 @@
 
 5. JobCard.jsx - need to pass in company Name instead of companyHandle
 
-
+6. JobList.jsx - if search term is empty, set back to all.jobs
 
 
 # LEARNING
