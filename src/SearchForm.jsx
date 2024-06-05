@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 /**
  * SearchForm
  *
@@ -19,8 +20,7 @@ function SearchForm({ handleSearch }) {
     evt.preventDefault();
     console.log("SearchForm: handleSubmit", {term})
 
-    handleSearch(term);
-    setTerm("");
+    handleSearch(term.trim());
   }
 
   function handleChange(evt) {
