@@ -16,7 +16,7 @@ function Homepage() {
 
   return (
     <div className="Homepage">
-      Jobly
+      Homepage
     </div>
   );
 }

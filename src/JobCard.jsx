@@ -18,7 +18,8 @@ function JobCard({ job }) {
 
   return (
     <div className="JobCard">
-      JobCard
+      Job Card
+      {title}
     </div>
   );
 }
