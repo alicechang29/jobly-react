@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Alert from "./Alert.jsx";
 
 /**
  * UserLoginForm
@@ -52,11 +53,7 @@ function UserLoginForm({ alerts = [], handleSave }) {
         type="password"
         onChange={handleChange}
       />
-      {formData.alerts.map(alert => (
-        <div class="alert alert-warning" role="alert">
-          {alert}
-        </div>)
-      )}
+      <Alert alerts={formData.alerts}/>
       <button>Login</button>
     </form>
   );
