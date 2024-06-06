@@ -26,6 +26,8 @@
 
 13. Can make getJobs in JoblyApi class to accept a search term. Same for getCompanies. This might help with ticket #12 as well
 
+14. Check that success and errors display in Alert component
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
 
