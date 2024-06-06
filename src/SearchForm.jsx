@@ -16,6 +16,7 @@ function SearchForm({ handleSearch }) {
   console.log("SearchForm");
   const [term, setTerm] = useState("");
 
+  /** Handle submission of search form, passes a term with no trailing spaces */
   function handleSubmit(evt) {
     evt.preventDefault();
     console.log("SearchForm: handleSubmit", {term})
@@ -23,6 +24,7 @@ function SearchForm({ handleSearch }) {
     handleSearch(term.trim());
   }
 
+  /** Handle change for form inputs */
   function handleChange(evt) {
     setTerm(evt.target.value);
   }
