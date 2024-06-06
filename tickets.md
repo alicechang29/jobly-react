@@ -12,5 +12,7 @@
 
 7. double check what's being rendered for CompanyCard.jsx after getting data
 
+8. Make sure the default nulls for the cards are being used properly
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
