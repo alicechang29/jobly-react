@@ -9,7 +9,7 @@ import Error from "./Error.jsx";
  *
  * Props: None
  *
- * State: company
+ * State:
  companyData ->{
     company:
      {
@@ -56,7 +56,7 @@ function CompanyDetail() {
       } catch (err) {
         console.log({ err });
         setCompanyData({
-          company: null,
+          company: {},
           isLoading: false,
           errors: err,
         });
@@ -64,7 +64,7 @@ function CompanyDetail() {
     }
 
     fetchCompanyData();
-  }, []);
+  }, [handle]);
 
   if (companyData.isLoading) {
     return <div className="CompanyDetail-loading">Loading...</div>;
@@ -72,8 +72,8 @@ function CompanyDetail() {
 
   return (
     <div className="CompanyDetail">
-      <h1>{companyData.company.name}</h1>
-      <h5>{companyData.company.description}</h5>
+      <h1>{companyData.company?.name}</h1>
+      <h5>{companyData.company?.description}</h5>
       {
         companyData.errors.length > 0 &&
         <Error errors={companyData.errors} />
