@@ -2,7 +2,9 @@
 /**
  * Company Card
  *
- * Props: { company, logoUrl }
+ * Props:
+ * company -> { handle, name, description, numEmployees, logoUrl }
+ * Only uses name, description, and possibly logoUrl if provided
  *
  * State: none
  *
@@ -15,11 +17,9 @@ function CompanyCard({ company }) {
   console.log("CompanyCard");
 
   const {
-    handle,
     name,
     description,
-    numEmployees,
-    logoUrl = null
+    logoUrl = null,
   } = company;
 
 
@@ -28,11 +28,13 @@ function CompanyCard({ company }) {
       <div className="card">
         <div className="card-header">
           <b>{name}</b>
-
         </div>
         <div className="card-body">
           <p className="card-text">{description}</p>
-          <img src={logoUrl} alt="logo" width="100" height="100"></img>
+          {
+            logoUrl !== null &&
+            <img src={logoUrl} alt="logo" width="100" height="100"></img>
+          }
         </div>
       </div>
     </div>
