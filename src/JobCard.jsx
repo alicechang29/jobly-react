@@ -25,14 +25,14 @@ function JobCard({ job }) {
   return (
     <div className="JobCard">
 
-      <div class="card">
-        <div class="card-header">
+      <div className="card">
+        <div className="card-header">
           <b>{companyName}</b>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">{title}</h5>
-          <p class="card-text">Salary: {salary}</p>
-          <p class="card-text">Equity: {equity}</p>
+        <div className="card-body">
+          <h5 className="card-title">{title}</h5>
+          <p className="card-text">Salary: {salary}</p>
+          <p className="card-text">Equity: {equity}</p>
         </div>
       </div>
     </div>

@@ -66,14 +66,19 @@ function CompanyDetail() {
     fetchCompanyData();
   }, []);
 
+  if (companyData.isLoading) {
+    return <div className="CompanyDetail-loading">Loading...</div>;
+  }
+
   return (
     <div className="CompanyDetail">
-      Company Detail
+      <h1>{companyData.company.name}</h1>
+      <h5>{companyData.company.description}</h5>
       {
         companyData.errors.length > 0 &&
-        <Error errors={companyData.errors}/>
+        <Error errors={companyData.errors} />
       }
-      <JobCardList />
+      <JobCardList jobs={companyData.company.jobs} />
     </div>
   );
 }
