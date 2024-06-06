@@ -37,8 +37,8 @@ function JobList() {
 
     try {
       const data = term !== ""
-      ? await JoblyApi.getJobsBySearch(term)
-      : await JoblyApi.getJobs()
+        ? await JoblyApi.getJobsBySearch(term)
+        : await JoblyApi.getJobs();
 
       const errors = data.length === 0
         ? ["Sorry, no results were found!"]
@@ -86,6 +86,12 @@ function JobList() {
 
     fetchJobsData();
   }, []);
+
+
+  if (jobsData.isLoading) {
+    console.log("isloading", jobsData.isLoading);
+    return <div className="JobList-loading">Loading...</div>;
+  }
 
   return (
     <div className="JobList">
