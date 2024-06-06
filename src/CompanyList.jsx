@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 import { Link } from "react-router-dom";
@@ -27,6 +27,7 @@ import { Link } from "react-router-dom";
 
 function CompanyList() {
   console.log("CompanyList");
+  // const [companyData, setCompanyData] = useState();
 
   //State
 
@@ -38,6 +39,10 @@ function CompanyList() {
   // add a to property for link
 
   //Make sure to pass the props
+
+  // if (companyData.isLoading) {
+  //   return <div className="CompanyList-loading">Loading...</div>;
+  // }
 
   return (
     <div className="CompanyList">

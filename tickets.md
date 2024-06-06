@@ -10,6 +10,7 @@
 
 6. JobList.jsx - if search term is empty, set back to all.jobs
 
+7. double check what's being rendered for CompanyCard.jsx after getting data
 
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
