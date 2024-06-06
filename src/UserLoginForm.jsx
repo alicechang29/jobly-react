@@ -52,6 +52,11 @@ function UserLoginForm({ alerts = [], handleSave }) {
         type="password"
         onChange={handleChange}
       />
+      {formData.alerts.map(alert => (
+        <div class="alert alert-warning" role="alert">
+          {alert}
+        </div>)
+      )}
       <button>Login</button>
     </form>
   );
