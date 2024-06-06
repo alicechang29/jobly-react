@@ -14,5 +14,15 @@
 
 8. Make sure the default nulls for the cards are being used properly
 
+9. Add key in Error Component
+
+10. Add Loader comp
+    - No need to wrap another div when returning Loader component with that comp's className
+
+11. in CompanyDetail
+    - Should there be optional chaining in the return statement? Any better ways?
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
+
+Added handle for useEffect dependency. This allows for rerender for any handle change
