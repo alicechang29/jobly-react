@@ -22,6 +22,10 @@
 11. in CompanyDetail
     - Should there be optional chaining in the return statement? Any better ways?
 
+12. Make a fetchJobsData combined function for Joblist for duplicate code
+
+13. Can make getJobs in JoblyApi class to accept a search term. Same for getCompanies. This might help with ticket #12 as well
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
 
