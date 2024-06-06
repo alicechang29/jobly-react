@@ -46,11 +46,39 @@ class JoblyApi {
   // Individual API routes
   /****************************************************************** COMPANY */
 
-  /** Get details on a company by handle. */
+  /** Get details on a company by handle.
+   * company -> { handle, name, description, numEmployees, logoUrl, jobs }
+   * where jobs is [{ id, title, salary, equity }, ...]
+  */
 
   static async getCompany(handle) {
     const res = await this.request(`companies/${handle}`);
     return res.company;
+  }
+
+  /** Get all companies
+   *
+   * returns:
+   * [ { handle, name, description, numEmployees, logoUrl }, ...]
+  */
+
+  static async getCompanies() {
+    const res = await this.request(`companies/`);
+    return res.companies;
+  }
+
+
+  /** Get companies by search term
+   *
+   * term: "apple"
+   *
+   * returns all companies with name partially matching the term (case-insensitive)
+   * [ { handle, name, description, numEmployees, logoUrl }, ...]
+  */
+
+  static async getCompaniesBySearch(term) {
+    const res = await this.request(`companies/`, {nameLike: term}, "GET");
+    return res.companies;
   }
 
   /******************************************************************    JOBS */
