@@ -15,19 +15,19 @@ function UserLoginForm({ handleUserLogin }) {
   console.log("UserLoginForm");
 
   const [formData, setFormData] = useState({
-    username,
-    password,
+    username: "",
+    password: "",
     errors: [],
   });
 
 
   /** Handle submission of login form, passes form data */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
     console.log("UserLoginForm: handleSubmit", { formData });
 
     try {
-      handleUserLogin({
+      await handleUserLogin({
         username: formData.username,
         password: formData.password
       });
@@ -41,7 +41,9 @@ function UserLoginForm({ handleUserLogin }) {
 
   /** Handle change for form inputs */
   function handleChange(evt) {
+    evt.preventDefault();
     const { name, value } = evt.target;
+
     setFormData(formData => ({
       ...formData,
       [name]: value,
@@ -56,6 +58,7 @@ function UserLoginForm({ handleUserLogin }) {
         <input
           id="UserLoginForm-username"
           value={formData.username}
+          name="username"
           required
           onChange={handleChange}
         />
@@ -63,15 +66,17 @@ function UserLoginForm({ handleUserLogin }) {
         <input
           id="UserLoginForm-password"
           value={formData.password}
+          name="password"
           required
           type="password"
           onChange={handleChange}
         />
-        <Alert alerts={formData.errors} />
+        {formData.errors.length > 0 &&
+          <Alert alerts={formData.errors} />
+        }
         <button>Login</button>
       </form>
     </div>
-
   );
 }
 
