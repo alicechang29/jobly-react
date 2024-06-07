@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Alert from "./Alert.jsx";
 
 /** UserRegistrationForm
  *
@@ -10,26 +12,26 @@
 function UserRegistrationForm({ handleUserRegistration }) {
   console.log("UserRegistrationForm");
 
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    fName: "",
-    lName: "",
-    email: "",
-    errors: [],
-  });
+  const [formData, setFormData] = useState(
+    {
+      user: {
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+      errors: [],
+    });
 
 
   /** Handle submission of registration form, passes form data */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
     console.log("UserRegistrationForm: handleSubmit", { formData });
-    //FIXME:
+
     try {
-      handleUserLogin({
-        username: formData.username,
-        password: formData.password
-      });
+      await handleUserRegistration(formData.user);
     } catch (err) {
       setFormData(formData => ({
         ...formData,
@@ -41,53 +43,72 @@ function UserRegistrationForm({ handleUserRegistration }) {
   /** Handle change for form inputs */
   function handleChange(evt) {
     const { name, value } = evt.target;
+
     setFormData(formData => ({
       ...formData,
-      [name]: value,
+      user: {
+        ...formData.user,
+        [name]: value,
+      }
     }));
   }
 
   return (
     <div className="UserRegistrationForm">
-      <h1>Login</h1>
-      <form className="UserRegistrationForm-form" onSubmit={handleSubmit}>
+      <h1>Sign Up</h1>
+      <form
+        className="UserRegistrationForm-form form-group"
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="UserRegistrationForm-username">Username</label>
         <input
           id="UserRegistrationForm-username"
-          value={formData.username}
+          className="form-control"
+          value={formData.user.username}
+          name="username"
           required
           onChange={handleChange}
         />
         <label htmlFor="UserRegistrationForm-password">Password</label>
         <input
           id="UserRegistrationForm-password"
-          value={formData.password}
+          className="form-control"
+          value={formData.user.password}
+          name="password"
           required
           type="password"
           onChange={handleChange}
         />
-        <label htmlFor="UserRegistrationForm-fname">First Name</label>
+        <label htmlFor="UserRegistrationForm-firstName">First Name</label>
         <input
           id="UserRegistrationForm-fname"
-          value={formData.fName}
+          className="form-control"
+          value={formData.user.firstName}
+          name="firstName"
           required
           onChange={handleChange}
         />
-        <label htmlFor="UserRegistrationForm-lname">Last Name</label>
+        <label htmlFor="UserRegistrationForm-lastName">Last Name</label>
         <input
           id="UserRegistrationForm-lname"
-          value={formData.lName}
+          className="form-control"
+          value={formData.user.lastName}
+          name="lastName"
           required
           onChange={handleChange}
-        />c
+        />
         <label htmlFor="UserRegistrationForm-email">Email</label>
         <input
           id="UserRegistrationForm-email"
-          value={formData.email}
+          className="form-control"
+          value={formData.user.email}
+          name="email"
           required
           onChange={handleChange}
         />
-        <Alert alerts={formData.errors} />
+        {formData.errors.length > 0 &&
+          <Alert alerts={formData.errors} />
+        }
         <button>Sign up</button>
       </form>
     </div>
