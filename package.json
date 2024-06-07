@@ -29,8 +29,10 @@
     "bootstrap": "*",
     "concurrently": "*",
     "json-server": "*",
+    "jsonwebtoken": "^9.0.2",
     "react": "*",
     "react-dom": "*",
+    "react-jwt": "^1.2.1",
     "react-loading": "^2.0.3",
     "react-router-dom": "*"
   }
