@@ -4,29 +4,36 @@ import Alert from "./Alert.jsx";
 /**
  * UserLoginForm
  *
- * Props: { errors: [error, ...], handleUserLogin }
+ * Props: { handleUserLogin }
  *
- * State: formData
+ * State: formData {username, password, errors}
  *
  * RoutesList -> UserLogin -> UserLoginForm
  */
 
-function UserLoginForm({ errors = [], handleUserLogin }) {
+function UserLoginForm({ handleUserLogin }) {
   console.log("UserLoginForm");
 
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    username,
+    password,
     errors
   });
 
 
-  /** Handle submission of search form, passes a term */
+  /** Handle submission of login form, passes a term */
   function handleSubmit(evt) {
     evt.preventDefault();
     console.log("UserLoginForm: handleSubmit", { formData });
 
-    handleSave(formData);
+    try {
+      handleUserLogin({ username: formData.username, password: formData.password });
+    } catch (err) {
+      setFormData(formData => ({
+        ...formData,
+        errors: err
+      }));
+    }
   }
 
   /** Handle change for form inputs */
