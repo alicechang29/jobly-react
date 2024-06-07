@@ -25,7 +25,7 @@ import userContext from "./userContext.js";
  *  App -> RoutesList
  */
 
-function RoutesList({ handleUserLogin}) {
+function RoutesList({ handleUserLogin, handleUserRegistration }) {
   console.log("RoutesList");
 
   const { token } = useContext(userContext);
@@ -66,11 +66,15 @@ function RoutesList({ handleUserLogin}) {
           <>
             <Route
               path="/login"
-              element={<UserLoginForm handleUserLogin={handleUserLogin}/>}
+              element={<UserLoginForm handleUserLogin={handleUserLogin} />}
             />
             <Route
               path="/signup"
-              element={<UserRegistrationForm />}
+              element={
+                <UserRegistrationForm
+                  handleUserRegistration={handleUserRegistration}
+                />
+              }
             />
           </>
         }

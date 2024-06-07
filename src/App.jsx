@@ -88,6 +88,24 @@ function App() {
     fetchUserData();
   }, [token]);
 
+  /** handle user registeration
+   * user -> { username, password, firstName, lastName, email }
+  */
+  async function handleUserRegistration(user) {
+    console.log("handleUserRegistration");
+
+    const token = await JoblyApi.registerUser(user);
+    console.log("handleUserRegistration", { token });
+
+    setUserData(currData => (
+      {
+        ...currData,
+        user,
+      }
+    ));
+    setToken(token);
+  }
+
   /** handle user login */
   async function handleUserLogin({ username, password }) {
     console.log("handleUserLogin");
@@ -142,7 +160,10 @@ function App() {
             }
           }>
           <Navigation logOut={logout} />
-          <RoutesList handleUserLogin={handleUserLogin} />
+          <RoutesList
+            handleUserLogin={handleUserLogin}
+            handleUserRegistration={handleUserRegistration}
+          />
         </userContext.Provider>
 
       </BrowserRouter>
