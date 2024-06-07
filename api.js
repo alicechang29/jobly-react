@@ -44,13 +44,27 @@ class JoblyApi {
   }
 
   // Individual API routes
-  /****************************************************************** LOGIN */
+  /****************************************************************** AUTH */
+
+  /**
+   * Authenticate user by username and password
+   * returns: token
+   */
   static async authenticateUser({ username, password }) {
     const res = await this.request(`auth/token`, { username, password }, "POST");
     return res.token;
   }
 
+  /****************************************************************** AUTH */
 
+  /**
+   * Authenticate user by username and password
+   * returns: token
+   */
+  static async getUserData({ username }) {
+    const res = await this.request(`users/${username}`);
+    return res.user;
+  }
 
   /****************************************************************** COMPANY */
 
