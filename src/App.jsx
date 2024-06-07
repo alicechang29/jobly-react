@@ -5,7 +5,7 @@ import RoutesList from "./RoutesList.jsx";
 import Navigation from "./Navigation.jsx";
 import JoblyApi from "../api.js";
 import userContext from "./userContext.js";
-import { decodeToken } from "react-jwt";
+import { jwtDecode } from "jwt-decode";
 
 /**
  * App
@@ -39,11 +39,6 @@ import { decodeToken } from "react-jwt";
 
 function App() {
   console.log("App");
-  const tokenTest = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
-
-
 
   const initialUserData = {
     user: {
@@ -61,8 +56,7 @@ function App() {
   const [userData, setUserData] = useState(initialUserData);
 
   const [token, setToken] = useState(null);
-  const jwtInfo = decodeToken(token);
-        console.log({jwtInfo})
+
 
   /** Rerenders app when token state changes setting userData state
    * to the correct userData
@@ -73,7 +67,7 @@ function App() {
     console.log("USE EFFECT: fetchChangedUserData token", token);
 
     async function fetchUserData() {
-      const username = jwtInfo?.username
+      const username = jwtDecode(token)
       try {
 
         const data = await JoblyApi.getUserData(username);

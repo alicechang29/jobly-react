@@ -30,6 +30,7 @@
     "concurrently": "*",
     "json-server": "*",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "react": "*",
     "react-dom": "*",
     "react-jwt": "^1.2.1",
