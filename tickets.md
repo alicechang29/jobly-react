@@ -45,7 +45,8 @@
 
 22. should not initialize a fetch request when login page is rendered -- DONE
 
-
+23. Keeping the token in api.js is much better!
+    - Keep the token in api.js makes it hold the token resposibility only in the api. App doesn't need to know about it at all!
 
 # LEARNING
 For search forms, can keep the state of the input and not clear it out

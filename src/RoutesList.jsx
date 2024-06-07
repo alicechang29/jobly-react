@@ -28,7 +28,7 @@ import userContext from "./userContext.js";
 function RoutesList({ handleUserLogin, handleUserRegistration }) {
   console.log("RoutesList");
 
-  const { token } = useContext(userContext);
+  const { username } = useContext(userContext);
 
   return (
     <div className="RoutesList">
@@ -40,7 +40,7 @@ function RoutesList({ handleUserLogin, handleUserRegistration }) {
         />
 
         {/* LOGGED IN ROUTES */}
-        {token &&
+        { username &&
           <>
             <Route
               path="/jobs"
@@ -62,7 +62,7 @@ function RoutesList({ handleUserLogin, handleUserRegistration }) {
         }
 
         {/* LOGGED OUT ROUTES */}
-        {!token &&
+        { !username &&
           <>
             <Route
               path="/login"

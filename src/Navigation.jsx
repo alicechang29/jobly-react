@@ -17,8 +17,8 @@ import userContext from "./userContext.js";
 
 function Navigation({ logout }) {
 
-  const { firstName, username, token } = useContext(userContext);
-  console.log("Navigation", { firstName, username, token });
+  const { firstName, username } = useContext(userContext);
+  console.log("Navigation", { firstName, username });
 
   return (
     <nav className="Navigation">
@@ -28,7 +28,7 @@ function Navigation({ logout }) {
 
       {/* LOGGED IN LINKS */}
       {
-        token &&
+        username &&
         <>
           <NavLink to="/companies" end>
             Companies
@@ -39,7 +39,7 @@ function Navigation({ logout }) {
           <NavLink to="/profile" end>
             Profile
           </NavLink>
-          <NavLink onClick={() => logout()} end>
+          <NavLink to="/" onClick={logout} end>
             Log out {username}
           </NavLink>
         </>
@@ -47,7 +47,7 @@ function Navigation({ logout }) {
 
       {/* LOGGED OUT ONLY LINKS */}
       {
-        !token &&
+        !username &&
         <>
           <NavLink to="/signup" end>
             Sign Up

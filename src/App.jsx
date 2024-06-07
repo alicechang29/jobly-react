@@ -1,11 +1,10 @@
 
-import { BrowserRouter, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { useState } from "react";
 import RoutesList from "./RoutesList.jsx";
 import Navigation from "./Navigation.jsx";
 import JoblyApi from "../api.js";
 import userContext from "./userContext.js";
-import { jwtDecode } from "jwt-decode";
 
 /**
  * App
@@ -40,7 +39,8 @@ import { jwtDecode } from "jwt-decode";
 function App() {
   console.log("App");
 
-  const initialUserData = {
+  //Can just have user: null
+  const noLoggedUserData = {
     user: {
       username: null,
       firstName: null,
@@ -51,87 +51,67 @@ function App() {
     },
     isLoading: false,
     errors: []
+  };
+
+  const [userFetchData, setUserData] = useState(noLoggedUserData);
+
+  //const [token, setToken] = useState(null);
+
+  /** Set the userData by by fetching with username */
+  async function setFetchUserData(username) {
+    console.log("fetchUserData", { username });
+
+    try {
+      const data = await JoblyApi.getUserData(username);
+      console.log("EFFECT DATA VALUES", data);
+      setUserData(
+        {
+          user: data,
+          isLoading: false,
+          errors: [],
+        }
+      );
+    } catch (err) {
+      console.log("ERR EFFECT", err);
+      setUserData(
+        {
+          user: userFetchData.user,
+          isLoading: false,
+          errors: err,
+        }
+      );
+    }
   }
-
-  const [userData, setUserData] = useState(initialUserData);
-
-  const [token, setToken] = useState(null);
-
-
-  /** Rerenders app when token state changes setting userData state
-   * to the correct userData
-   */
-  useEffect(function fetchChangedUserData() {
-    console.log("USE EFFECT: fetchChangedUserData");
-
-    async function fetchUserData() {
-      const username = jwtDecode(token)
-      try {
-
-        const data = await JoblyApi.getUserData(username);
-        console.log("EFFECT DATA VALUES", data);
-        setUserData(
-          {
-            user: data,
-            isLoading: false,
-            errors: [],
-          }
-        );
-      } catch (err) {
-        console.log("ERR EFFECT", err);
-        setUserData(
-          {
-            user: userData.user,
-            isLoading: false,
-            errors: err,
-          }
-        );
-      }
-    }
-
-    //Fetch userData only if we have a token
-    //Otherwise set isLoading to false
-    if (token) {
-      fetchUserData();
-    } else {
-      setUserData(currData => ({
-        ...currData,
-        isLoading: false
-      }));
-    }
-
-  }, [token]);
 
   /** handle user registeration
    * user -> { username, password, firstName, lastName, email }
   */
   async function handleUserRegistration(user) {
-    console.log("handleUserRegistration");
+    console.log("handleUserRegistration", { user });
 
-    const token = await JoblyApi.registerUser(user);
-    console.log("handleUserRegistration", { token });
-
-    setToken(token);
+    await JoblyApi.registerUser(user);
+    await setFetchUserData(user.username);
+    console.log("User registered!");
   }
 
   /** handle user login */
   async function handleUserLogin({ username, password }) {
-    console.log("handleUserLogin");
+    console.log("handleUserLogin", { username, password });
 
-    const token = await JoblyApi.authenticateUser({ username, password });
-    console.log("handleUserLogin", { token });
-
-    setToken(token);
+    await JoblyApi.authenticateUser({ username, password });
+    await setFetchUserData(username);
+    console.log("Logged in!");
   }
 
   /** Logout user, resetting userData and context */
   function logout() {
-    console.log("log out:", { username, firstName });
+    console.log("log out");
 
-    setUserData(initialUserData);
+    setUserData(noLoggedUserData);
+    JoblyApi.logoutUser();
   }
 
-  if (userData.isLoading) {
+  if (userFetchData.isLoading) {
     return <div className="UserLogin-loading">Loading...</div>;
   }
 
@@ -142,12 +122,12 @@ function App() {
         <userContext.Provider
           value={
             {
-              firstName: userData.user.firstName,
-              username: userData.user.username,
-              token: token
+              firstName: userFetchData.user.firstName,
+              username: userFetchData.user.username,
             }
-          }>
-          <Navigation logOut={logout} />
+          }
+        >
+          <Navigation logout={logout} />
           <RoutesList
             handleUserLogin={handleUserLogin}
             handleUserRegistration={handleUserRegistration}
