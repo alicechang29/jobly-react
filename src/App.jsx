@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import RoutesList from "./RoutesList.jsx";
 import Navigation from "./Navigation.jsx";
 import JoblyApi from "../api.js";
+import userContext from "./userContext.js";
 
 /**
  * App
@@ -53,6 +54,7 @@ function App() {
 
   const [token, setToken] = useState(null);
 
+  //FIXME: how do we use our token correctly?
   /** Rerenders app when token state changes setting userData state
    * to the correct userData
    */
@@ -73,7 +75,7 @@ function App() {
       } catch (err) {
         setUserData(
           {
-            user: data,
+            user: userData.user,
             isLoading: false,
             errors: err,
           }
@@ -91,15 +93,44 @@ function App() {
     setToken(token);
   }
 
-  if (formFieldsData.isLoading) {
+  /** Logout user, resetting userData and context */
+  function logout(){
+    console.log("log out:", {username, firstName});
+
+    setUserData({
+      user: {
+        username: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        isAdmin: null,
+        jobs: null
+      },
+      isLoading: false,
+      errors: []
+    })
+  }
+
+
+  if (userData.isLoading) {
     return <div className="UserLogin-loading">Loading...</div>;
   }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Navigation />
-        <RoutesList />
+
+        <userContext.Provider
+          value={
+            {
+              firstName: userData.user.firstName,
+              username: userData.user.username,
+            }
+          }>
+          <Navigation logOut={logout}/>
+          <RoutesList />
+        </userContext.Provider>
+
       </BrowserRouter>
     </div>
   );
