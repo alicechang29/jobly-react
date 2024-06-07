@@ -1,5 +1,5 @@
 
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import RoutesList from "./RoutesList.jsx";
 import Navigation from "./Navigation.jsx";
@@ -40,12 +40,12 @@ function App() {
 
   const [userData, setUserData] = useState({
     user: {
-      username,
-      firstName,
-      lastName,
-      email,
-      isAdmin,
-      jobs
+      username: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+      isAdmin: null,
+      jobs: null
     },
     isLoading: true,
     errors: []
@@ -85,15 +85,10 @@ function App() {
   }, [token]);
 
   /** handle user login */
-  async function handleUserLogin(username, password) {
+  async function handleUserLogin({ username, password }) {
     //make a fetch to login route
-    const result = await JoblyApi.authenticateUser({ username, password });
-    //if no errors, set the token
-    //TODO:
-
-    //if errors, send list of errors back to UserLoginForm
-
-
+    const token = await JoblyApi.authenticateUser({ username, password });
+    setToken(token);
   }
 
   if (formFieldsData.isLoading) {
