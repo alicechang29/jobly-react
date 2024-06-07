@@ -17,18 +17,18 @@ import userContext from "./userContext.js";
 
 function Navigation({ logout }) {
 
-  const { firstName, username } = useContext(userContext);
-  console.log("Navigation", {firstName, username});
+  const { firstName, username, token } = useContext(userContext);
+  console.log("Navigation", { firstName, username, token });
 
   return (
     <nav className="Navigation">
-      <NavLink to="" end>
+      <NavLink to="/" end>
         Jobly
       </NavLink>
 
       {/* LOGGED IN LINKS */}
       {
-        firstName !== null && username !== null &&
+        token &&
         <>
           <NavLink to="/companies" end>
             Companies
@@ -47,7 +47,7 @@ function Navigation({ logout }) {
 
       {/* LOGGED OUT ONLY LINKS */}
       {
-        firstName === null && username === null &&
+        !token &&
         <>
           <NavLink to="/signup" end>
             Sign Up
