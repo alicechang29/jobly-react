@@ -11,12 +11,12 @@ function UserProfileForm({ handleProfileUpdate }) {
   console.log("UserProfileForm");
 
   const [formData, setFormData] = useState({
-    username,
-    password,
-    fName,
-    lName,
-    email,
-    errors: []
+    username: "",
+    password: "",
+    fName: "",
+    lName: "",
+    email: "",
+    errors: [],
   });
 
 

@@ -11,12 +11,12 @@ function UserRegistrationForm({ handleUserRegistration }) {
   console.log("UserRegistrationForm");
 
   const [formData, setFormData] = useState({
-    username,
-    password,
-    fName,
-    lName,
-    email,
-    errors: []
+    username: "",
+    password: "",
+    fName: "",
+    lName: "",
+    email: "",
+    errors: [],
   });
 
 
