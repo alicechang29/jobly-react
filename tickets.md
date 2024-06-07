@@ -43,6 +43,10 @@
 
 21. useContext is not updating the firstName (app.jsx)
 
+22. should not initialize a fetch request when login page is rendered
+
+
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
 
