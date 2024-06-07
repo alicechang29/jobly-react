@@ -28,7 +28,12 @@
 
 14. Check that success and errors display in Alert component
 
+15. Figma - Update with errors
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
 
 Added handle for useEffect dependency. This allows for rerender for any handle change
+
+When dealing with errors, want to put in place where best equipped to deal with error
+- if error is UI, catch it here
