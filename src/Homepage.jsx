@@ -1,3 +1,5 @@
+import userContext from "./userContext";
+import { useContext } from "react";
 
 /**
  * Homepage
@@ -13,10 +15,14 @@
 
 function Homepage() {
   console.log("Homepage");
+  //FIXME:
+  //const { firstName } = useContext();
 
   return (
     <div className="Homepage">
-      Homepage
+
+      <h2>Jobly</h2>
+      {/* <h1>Welcome Back, {firstName}</h1> */}
     </div>
   );
 }
