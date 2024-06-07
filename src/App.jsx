@@ -1,6 +1,6 @@
 
 import { BrowserRouter } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RoutesList from "./RoutesList.jsx";
 import Navigation from "./Navigation.jsx";
 import JoblyApi from "../api.js";
@@ -11,10 +11,28 @@ import JoblyApi from "../api.js";
  * Handles user authentication
  *
  * State:
+ * userData ->
+ * {
+    user: {
+      username,
+      firstName,
+      lastName,
+      email,
+      isAdmin,
+      jobs
+    },
+    isLoading: true,
+    errors: []
+  }
+ *
+ * token -> "user's token" (default: null)
  *
  * Props: None
  *
- * App -> RoutesList -> UserLoginForm/UserRegistrationForm/UserProfileForm
+ * Effect:
+ *  Rerender the app when token state changes
+ *
+ * App -> RoutesList -> [UserLoginForm, UserRegistrationForm, UserProfileForm]
  */
 
 function App() {
@@ -29,15 +47,47 @@ function App() {
       isAdmin,
       jobs
     },
-    isLoading: true
+    isLoading: true,
+    errors: []
   });
 
   const [token, setToken] = useState(null);
 
+  /** Rerenders app when token state changes setting userData state
+   * to the correct userData
+   */
+  useEffect(function fetchChangedUserData() {
+    console.log("USE EFFECT: fetchChangedUserData");
+
+    async function fetchUserData() {
+      try {
+        // JoblyApi.token = token; <-- TODO: is this how we would set the token
+        // on the class?
+        //TODO: Is userData.username the most up to date information for this?
+        const data = await JoblyApi.getUserData({ username: userData.username });
+        setUserData({
+          user: data,
+          isLoading: false,
+          errors: err,
+        });
+      } catch (err) {
+        setUserData(
+          {
+            user: data,
+            isLoading: false,
+            errors: err,
+          }
+        );
+      }
+    }
+
+    fetchUserData();
+  }, [token]);
+
   /** handle user login */
   async function handleUserLogin(username, password) {
     //make a fetch to login route
-    const result = await JoblyApi.authenticateUser(username, password);
+    const result = await JoblyApi.authenticateUser({ username, password });
     //if no errors, set the token
     //TODO:
 
