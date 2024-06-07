@@ -55,7 +55,13 @@ class JoblyApi {
   static async authenticateUser({ username, password }) {
     const res = await this.request(`auth/token`, { username, password }, "POST");
     this.token = res.token;
-    return res.token;
+    // return res.token;
+  }
+
+  /** Logouts useer
+   */
+  static logoutUser() {
+    this.token = null;
   }
 
   /**
@@ -72,7 +78,7 @@ class JoblyApi {
     );
 
     this.token = res.token;
-    return res.token;
+    // return res.token;
   }
 
   /****************************************************************** AUTH */
@@ -81,7 +87,7 @@ class JoblyApi {
    * Authenticate user by username and password
    * returns: token
    */
-  static async getUserData({ username }) {
+  static async getUserData( username ) {
     const res = await this.request(`users/${username}`);
     console.log("getUserData", res.user);
     return res.user;
