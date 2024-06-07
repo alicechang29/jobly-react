@@ -3,7 +3,7 @@ import { useState } from "react";
 import UserLoginForm from "./UserLoginForm";
 
 /**
- * Company Detail
+ *
  *
  * Props: saveUserData <- cb from App
  *
@@ -24,6 +24,8 @@ import UserLoginForm from "./UserLoginForm";
 
  */
 
+//FIXME: this page will go
+
 function UserLogin({ saveUserData }) {
   console.log("UserLogin");
 
@@ -34,16 +36,16 @@ function UserLogin({ saveUserData }) {
   });
 
   /** save user login */
-  function handleSave(){
+  function handleSave() {
 
 
     // no errors
-    saveUserData(formFieldsData)
+    saveUserData(formFieldsData);
     setFormFields({
       formFields: { username: null, password: null },
       isLoading: false,
       errors: [],
-    })
+    });
   }
 
   if (formFieldsData.isLoading) {
@@ -53,7 +55,7 @@ function UserLogin({ saveUserData }) {
   return (
     <div className="UserLogin">
       <h1>Login here!</h1>
-      <UserLoginForm alerts={errors} handleSave={ handleSave } />
+      <UserLoginForm alerts={errors} handleSave={handleSave} />
     </div>
   );
 }
