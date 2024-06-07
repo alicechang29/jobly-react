@@ -17,7 +17,7 @@ function UserLoginForm({ handleUserLogin }) {
   const [formData, setFormData] = useState({
     username,
     password,
-    errors
+    errors: [],
   });
 
 
@@ -27,7 +27,10 @@ function UserLoginForm({ handleUserLogin }) {
     console.log("UserLoginForm: handleSubmit", { formData });
 
     try {
-      handleUserLogin({ username: formData.username, password: formData.password });
+      handleUserLogin({
+        username: formData.username,
+        password: formData.password
+      });
     } catch (err) {
       setFormData(formData => ({
         ...formData,
@@ -62,7 +65,7 @@ function UserLoginForm({ handleUserLogin }) {
           type="password"
           onChange={handleChange}
         />
-        <Alert alerts={formData.alerts} />
+        <Alert alerts={formData.errors} />
         <button>Login</button>
       </form>
     </div>
