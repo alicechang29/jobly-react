@@ -12,7 +12,11 @@ import userContext from "./userContext.js";
 /**
  * RoutesList
  *
- * Props: none
+ * Props:
+ * Callback functions from App ->
+ * handleUserLogin: cb
+ * handleProfileUpdate: cb
+ * handleUserRegistration: cb
  *
  * State: none
  *
@@ -21,7 +25,7 @@ import userContext from "./userContext.js";
  *  App -> RoutesList
  */
 
-function RoutesList() {
+function RoutesList({ handleUserLogin}) {
   console.log("RoutesList");
 
   const { token } = useContext(userContext);
@@ -62,7 +66,7 @@ function RoutesList() {
           <>
             <Route
               path="/login"
-              element={<UserLoginForm />}
+              element={<UserLoginForm handleUserLogin={handleUserLogin}/>}
             />
             <Route
               path="/signup"
