@@ -59,7 +59,7 @@ class JoblyApi {
   }
 
   /**
-   * Registar user by { username, password, firstName, lastName, email }
+   * Register user by { username, password, firstName, lastName, email }
    * returns: token
    */
   static async registerUser(
