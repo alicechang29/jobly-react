@@ -41,7 +41,9 @@ function CompanyDetail() {
   });
 
 
-  /** fetches and sets company data by name on initial render */
+  /** fetches and sets company data by name on initial render
+   * and on handle dependency
+  */
   useEffect(function fetchCompanyByName() {
     console.log("USE EFFECT: fetchCompanyByName");
 
