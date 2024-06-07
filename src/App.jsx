@@ -94,8 +94,8 @@ function App() {
   }
 
   /** Logout user, resetting userData and context */
-  function logout(){
-    console.log("log out:", {username, firstName});
+  function logout() {
+    console.log("log out:", { username, firstName });
 
     setUserData({
       user: {
@@ -108,7 +108,7 @@ function App() {
       },
       isLoading: false,
       errors: []
-    })
+    });
   }
 
 
@@ -125,9 +125,10 @@ function App() {
             {
               firstName: userData.user.firstName,
               username: userData.user.username,
+              token: token
             }
           }>
-          <Navigation logOut={logout}/>
+          <Navigation logOut={logout} />
           <RoutesList />
         </userContext.Provider>
 
