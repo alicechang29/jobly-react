@@ -63,8 +63,6 @@ function App() {
    */
   useEffect(function fetchChangedUserData() {
     console.log("USE EFFECT: fetchChangedUserData");
-    console.log("USE EFFECT: fetchChangedUserData USER INFO", userData.user);
-    console.log("USE EFFECT: fetchChangedUserData token", token);
 
     async function fetchUserData() {
       const username = jwtDecode(token)
@@ -80,7 +78,7 @@ function App() {
           }
         );
       } catch (err) {
-        console.log("ERR EFFECT");
+        console.log("ERR EFFECT", err);
         setUserData(
           {
             user: userData.user,
@@ -91,6 +89,8 @@ function App() {
       }
     }
 
+    //Fetch userData only if we have a token
+    //Otherwise set isLoading to false
     if (token) {
       fetchUserData();
     } else {
@@ -117,7 +117,7 @@ function App() {
   /** handle user login */
   async function handleUserLogin({ username, password }) {
     console.log("handleUserLogin");
-    //make a fetch to login route
+
     const token = await JoblyApi.authenticateUser({ username, password });
     console.log("handleUserLogin", { token });
 
