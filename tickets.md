@@ -35,6 +35,12 @@
 17. Create a more secure Navigation Comp.
     Check the token rather than the username and fName
 
+18. TODO: app - handle user registration, pass to registration form
+
+19. TODO:  RoutesList - do token checks
+
+19. TODO:  Trim data in forms
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
 
