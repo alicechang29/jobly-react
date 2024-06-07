@@ -30,6 +30,11 @@
 
 15. Figma - Update with errors
 
+16. Can we use onClick and to props for NavLink?
+
+17. Create a more secure Navigation Comp.
+    Check the token rather than the username and fName
+
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
 
