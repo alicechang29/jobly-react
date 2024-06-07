@@ -44,6 +44,14 @@ class JoblyApi {
   }
 
   // Individual API routes
+  /****************************************************************** LOGIN */
+  static async authenticateUser({ username, password }) {
+    const res = await this.request(`auth/token`, { username, password }, "POST");
+    return res.token;
+  }
+
+
+
   /****************************************************************** COMPANY */
 
   /** Get details on a company by handle.
@@ -77,7 +85,7 @@ class JoblyApi {
   */
 
   static async getCompaniesBySearch(term) {
-    const res = await this.request(`companies/`, {nameLike: term}, "GET");
+    const res = await this.request(`companies/`, { nameLike: term }, "GET");
     return res.companies;
   }
 
@@ -103,7 +111,7 @@ class JoblyApi {
   */
 
   static async getJobsBySearch(term) {
-    const res = await this.request(`jobs/`, {title: term}, "GET");
+    const res = await this.request(`jobs/`, { title: term }, "GET");
 
     return res.jobs;
   }
