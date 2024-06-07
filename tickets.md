@@ -39,7 +39,9 @@
 
 19. TODO:  RoutesList - do token checks
 
-19. TODO:  Trim data in forms
+20. TODO:  Trim data in forms
+
+21. useContext is not updating the firstName (app.jsx)
 
 # LEARNING
 For search forms, can keep the state of the input and not clear it out
