@@ -53,10 +53,14 @@ function UserLoginForm({ handleUserLogin }) {
   return (
     <div className="UserLoginForm">
       <h1>Login</h1>
-      <form className="UserLoginForm-form" onSubmit={handleSubmit}>
+      <form
+      className="UserLoginForm-form form-group"
+      onSubmit={handleSubmit}
+      >
         <label htmlFor="UserLoginForm-username">Username</label>
         <input
           id="UserLoginForm-username"
+          className="form-control"
           value={formData.username}
           name="username"
           required
@@ -65,6 +69,7 @@ function UserLoginForm({ handleUserLogin }) {
         <label htmlFor="UserLoginForm-password">Password</label>
         <input
           id="UserLoginForm-password"
+          className="form-control"
           value={formData.password}
           name="password"
           required
