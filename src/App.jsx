@@ -38,7 +38,6 @@ import userContext from "./userContext.js";
 
 function App() {
   console.log("App");
-  //FIXME: why is useContext not getting updated firstName value?
 
   const [userData, setUserData] = useState({
     user: {
@@ -55,7 +54,6 @@ function App() {
 
   const [token, setToken] = useState(null);
 
-  //FIXME: how do we use our token correctly?
   /** Rerenders app when token state changes setting userData state
    * to the correct userData
    */
@@ -63,19 +61,19 @@ function App() {
     console.log("USE EFFECT: fetchChangedUserData");
     console.log("USE EFFECT: fetchChangedUserData USER INFO", userData.user);
     console.log("USE EFFECT: fetchChangedUserData token", token);
-    //TODO: stop this from running when we are coming from registration route
+
     async function fetchUserData() {
       try {
-        // JoblyApi.token = token; <-- TODO: is this how we would set the token
-        // on the class?
-        //this is not the most up to date user
+        //FIXME: DECODE the token so that we can get the username here
         const data = await JoblyApi.getUserData({ username: userData.user.username });
         console.log("EFFECT DATA VALUES", data);
-        setUserData({
-          user: data,
-          isLoading: false,
-          errors: err,
-        });
+        setUserData(
+          {
+            user: data,
+            isLoading: false,
+            errors: [],
+          }
+        );
       } catch (err) {
         console.log("ERR EFFECT");
         setUserData(
@@ -87,12 +85,16 @@ function App() {
         );
       }
     }
-
-    if (userData.user.username === null ||
-      userData.user.username === undefined ||
-      userData.user.firstName === null) {
+    //FIXME: how do we stop this on initial load?
+    if (token) {
       fetchUserData();
+    } else {
+      setUserData(currData => ({
+        ...currData,
+        isLoading: false
+      }));
     }
+
   }, [token]);
 
   /** handle user registeration
@@ -120,6 +122,9 @@ function App() {
     //make a fetch to login route
     const token = await JoblyApi.authenticateUser({ username, password });
     console.log("handleUserLogin", { token });
+
+    //FIXME: only use handleUserLogin/Register to get and set token
+
     setUserData(currData => (
       {
         ...currData,
