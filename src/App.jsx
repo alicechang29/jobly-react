@@ -5,6 +5,7 @@ import RoutesList from "./RoutesList.jsx";
 import Navigation from "./Navigation.jsx";
 import JoblyApi from "../api.js";
 import userContext from "./userContext.js";
+import { decodeToken } from "react-jwt";
 
 /**
  * App
@@ -38,8 +39,13 @@ import userContext from "./userContext.js";
 
 function App() {
   console.log("App");
+  const tokenTest = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
-  const [userData, setUserData] = useState({
+
+
+  const initialUserData = {
     user: {
       username: null,
       firstName: null,
@@ -48,11 +54,15 @@ function App() {
       isAdmin: null,
       jobs: null
     },
-    isLoading: true,
+    isLoading: false,
     errors: []
-  });
+  }
+
+  const [userData, setUserData] = useState(initialUserData);
 
   const [token, setToken] = useState(null);
+  const jwtInfo = decodeToken(token);
+        console.log({jwtInfo})
 
   /** Rerenders app when token state changes setting userData state
    * to the correct userData
@@ -63,9 +73,10 @@ function App() {
     console.log("USE EFFECT: fetchChangedUserData token", token);
 
     async function fetchUserData() {
+      const username = jwtInfo?.username
       try {
-        //FIXME: DECODE the token so that we can get the username here
-        const data = await JoblyApi.getUserData({ username: userData.user.username });
+
+        const data = await JoblyApi.getUserData(username);
         console.log("EFFECT DATA VALUES", data);
         setUserData(
           {
@@ -85,7 +96,7 @@ function App() {
         );
       }
     }
-    //FIXME: how do we stop this on initial load?
+
     if (token) {
       fetchUserData();
     } else {
@@ -106,13 +117,6 @@ function App() {
     const token = await JoblyApi.registerUser(user);
     console.log("handleUserRegistration", { token });
 
-    //TODO:
-    setUserData(currData => (
-      {
-        ...currData,
-        user,
-      }
-    ));
     setToken(token);
   }
 
@@ -123,17 +127,6 @@ function App() {
     const token = await JoblyApi.authenticateUser({ username, password });
     console.log("handleUserLogin", { token });
 
-    //FIXME: only use handleUserLogin/Register to get and set token
-
-    setUserData(currData => (
-      {
-        ...currData,
-        user: {
-          ...currData.user,
-          username //only updating username in user object
-        }
-      }
-    ));
     setToken(token);
   }
 
@@ -141,20 +134,8 @@ function App() {
   function logout() {
     console.log("log out:", { username, firstName });
 
-    setUserData({
-      user: {
-        username: null,
-        firstName: null,
-        lastName: null,
-        email: null,
-        isAdmin: null,
-        jobs: null
-      },
-      isLoading: false,
-      errors: []
-    });
+    setUserData(initialUserData);
   }
-
 
   if (userData.isLoading) {
     return <div className="UserLogin-loading">Loading...</div>;
