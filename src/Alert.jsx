@@ -17,7 +17,7 @@ function Alert({ alerts = [] }) {
   return (
     <div className="Alert">
       {alerts.map(alert => (
-        <div class="alert alert-warning" role="alert">
+        <div key={alert} className="alert alert-warning" role="alert">
           {alert}
         </div>)
       )}
