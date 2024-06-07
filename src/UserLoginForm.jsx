@@ -8,7 +8,7 @@ import Alert from "./Alert.jsx";
  *
  * State: formData {username, password, errors}
  *
- * RoutesList -> UserLogin -> UserLoginForm
+ * RoutesList -> UserLoginForm
  */
 
 function UserLoginForm({ handleUserLogin }) {
@@ -21,7 +21,7 @@ function UserLoginForm({ handleUserLogin }) {
   });
 
 
-  /** Handle submission of login form, passes a term */
+  /** Handle submission of login form, passes form data */
   function handleSubmit(evt) {
     evt.preventDefault();
     console.log("UserLoginForm: handleSubmit", { formData });
@@ -56,12 +56,14 @@ function UserLoginForm({ handleUserLogin }) {
         <input
           id="UserLoginForm-username"
           value={formData.username}
+          required
           onChange={handleChange}
         />
         <label htmlFor="UserLoginForm-password">Password</label>
         <input
           id="UserLoginForm-password"
           value={formData.password}
+          required
           type="password"
           onChange={handleChange}
         />
