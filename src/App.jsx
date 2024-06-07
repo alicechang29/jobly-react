@@ -38,6 +38,7 @@ import userContext from "./userContext.js";
 
 function App() {
   console.log("App");
+  //FIXME: why is useContext not getting updated firstName value?
 
   const [userData, setUserData] = useState({
     user: {
@@ -65,8 +66,9 @@ function App() {
       try {
         // JoblyApi.token = token; <-- TODO: is this how we would set the token
         // on the class?
-        //TODO: Is userData.username the most up to date information for this?
-        const data = await JoblyApi.getUserData({ username: userData.username });
+        //this is not the most up to date user
+        const data = await JoblyApi.getUserData({ username: userData.user.username });
+        console.log("EFFECT DATA VALUES", data);
         setUserData({
           user: data,
           isLoading: false,
@@ -88,8 +90,19 @@ function App() {
 
   /** handle user login */
   async function handleUserLogin({ username, password }) {
+    console.log("handleUserLogin");
     //make a fetch to login route
     const token = await JoblyApi.authenticateUser({ username, password });
+    console.log("handleUserLogin", { token });
+    setUserData(currData => (
+      {
+        ...currData,
+        user: {
+          ...currData.user,
+          username //only updating username in user object
+        }
+      }
+    ));
     setToken(token);
   }
 
@@ -129,7 +142,7 @@ function App() {
             }
           }>
           <Navigation logOut={logout} />
-          <RoutesList handleUserLogin={handleUserLogin}/>
+          <RoutesList handleUserLogin={handleUserLogin} />
         </userContext.Provider>
 
       </BrowserRouter>
