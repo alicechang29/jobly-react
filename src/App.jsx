@@ -61,7 +61,9 @@ function App() {
    */
   useEffect(function fetchChangedUserData() {
     console.log("USE EFFECT: fetchChangedUserData");
-
+    console.log("USE EFFECT: fetchChangedUserData USER INFO", userData.user);
+    console.log("USE EFFECT: fetchChangedUserData token", token);
+    //TODO: stop this from running when we are coming from registration route
     async function fetchUserData() {
       try {
         // JoblyApi.token = token; <-- TODO: is this how we would set the token
@@ -75,6 +77,7 @@ function App() {
           errors: err,
         });
       } catch (err) {
+        console.log("ERR EFFECT");
         setUserData(
           {
             user: userData.user,
@@ -85,7 +88,11 @@ function App() {
       }
     }
 
-    fetchUserData();
+    if (userData.user.username === null ||
+      userData.user.username === undefined ||
+      userData.user.firstName === null) {
+      fetchUserData();
+    }
   }, [token]);
 
   /** handle user registeration
@@ -97,6 +104,7 @@ function App() {
     const token = await JoblyApi.registerUser(user);
     console.log("handleUserRegistration", { token });
 
+    //TODO:
     setUserData(currData => (
       {
         ...currData,
