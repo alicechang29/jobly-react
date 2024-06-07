@@ -1,22 +1,22 @@
-1. Update all docstrings to include errors
+1. TODO: Update all docstrings to include errors
 
-2. update jobs -> jobsData for all states
+2. update jobs -> jobsData for all states -- DONE
 
-3. Should not hard code 404 in our error messages
+3. Should not hard code 404 in our error messages -- DONE
 
 4. RoutesList - fix "*" for Navigate to - DONE
 
-5. JobCard.jsx - need to pass in company Name instead of companyHandle
+5. JobCard.jsx - need to pass in company Name instead of companyHandle -- DONE
 
-6. JobList.jsx - if search term is empty, set back to all.jobs
+6. JobList.jsx - if search term is empty, set back to all.jobs -- DONE
 
-7. double check what's being rendered for CompanyCard.jsx after getting data
+7. double check what's being rendered for CompanyCard.jsx after getting data -- DONE
 
-8. Make sure the default nulls for the cards are being used properly
+8. Make sure the default nulls for the cards are being used properly -- DONE
 
-9. Add key in Error Component
+9. TODO: Add key in Error Component
 
-10. Add Loader comp
+10. TODO:  Add Loader comp
     - No need to wrap another div when returning Loader component with that comp's className
 
 11. in CompanyDetail
@@ -33,17 +33,17 @@
 16. Can we use onClick and to props for NavLink?
 
 17. Create a more secure Navigation Comp.
-    Check the token rather than the username and fName
+    Check the token rather than the username and fName -- DONE
 
-18. TODO: app - handle user registration, pass to registration form
+18. app - handle user registration, pass to registration form -- DONE
 
-19. TODO:  RoutesList - do token checks
+19. RoutesList - do token checks -- DONE
 
 20. TODO:  Trim data in forms
 
-21. useContext is not updating the firstName (app.jsx)
+21. useContext is not updating the firstName (app.jsx) -- DONE
 
-22. should not initialize a fetch request when login page is rendered
+22. should not initialize a fetch request when login page is rendered -- DONE
 
 
 
