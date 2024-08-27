@@ -9,12 +9,6 @@ const BASE_URL = import.meta.env.VITE_REACT_APP_BASE_URL || "http://localhost:30
  */
 
 class JoblyApi {
-  // Remember, the backend needs to be authorized with a token
-  // We're providing a token you can use to interact with the backend API
-  // DON'T MODIFY THIS TOKEN
-  // static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-  //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-  //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
   static token = "";
 
@@ -49,13 +43,11 @@ class JoblyApi {
   /****************************************************************** AUTH */
 
   /**
-   * Authenticate user by username and password
-   * returns: token
+   * Authenticate user by username and password and sets the token
    */
   static async authenticateUser({ username, password }) {
     const res = await this.request(`auth/token`, { username, password }, "POST");
     this.token = res.token;
-    // return res.token;
   }
 
   /** Logouts useer
@@ -65,8 +57,7 @@ class JoblyApi {
   }
 
   /**
-   * Register user by { username, password, firstName, lastName, email }
-   * returns: token
+   * Register user by { username, password, firstName, lastName, email } and sets the token
    */
   static async registerUser(
     { username, password, firstName, lastName, email }
@@ -78,7 +69,6 @@ class JoblyApi {
     );
 
     this.token = res.token;
-    // return res.token;
   }
 
   /****************************************************************** AUTH */
@@ -87,7 +77,7 @@ class JoblyApi {
    * Authenticate user by username and password
    * returns: token
    */
-  static async getUserData( username ) {
+  static async getUserData(username) {
     const res = await this.request(`users/${username}`);
     console.log("getUserData", res.user);
     return res.user;
