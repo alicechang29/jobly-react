@@ -36,8 +36,7 @@ function CompanyList() {
     {
       companies: [],
       isLoading: true,
-      searchTerm: "",
-      errors: []
+      searchTerm: ""
     }
   );
 
@@ -45,29 +44,16 @@ function CompanyList() {
   async function handleSearch(term) {
     console.log("handleSearch", { term });
 
-    try {
-      const data = term !== ""
-        ? await JoblyApi.getCompaniesBySearch(term)
-        : await JoblyApi.getCompanies();
+    let data = term !== ""
+      ? await JoblyApi.getCompaniesBySearch(term)
+      : await JoblyApi.getCompanies();
 
-      const errors = data.length === 0
-        ? ["Sorry, no results were found!"]
-        : [];
+    setCompaniesData({
+      companies: data,
+      isLoading: false,
+      searchTerm: term,
+    });
 
-      setCompaniesData({
-        companies: data,
-        isLoading: false,
-        searchTerm: term,
-        errors,
-      });
-    } catch (err) {
-      setCompaniesData({
-        companies: [],
-        isLoading: false,
-        searchTerm: "",
-        errors: err,
-      });
-    }
   }
 
 
@@ -76,24 +62,15 @@ function CompanyList() {
     console.log("USE EFFECT: fetchAllCompanies");
 
     async function fetchCompaniesData() {
-      try {
-        const data = await JoblyApi.getCompanies();
-        setCompaniesData({
-          companies: data,
-          isLoading: false,
-          searchTerm: "",
-          errors: [],
-        });
-      } catch (err) {
-        setCompaniesData({
-          companies: [],
-          isLoading: false,
-          searchTerm: "",
-          errors: err,
-        });
-      }
-    }
 
+      const data = await JoblyApi.getCompanies();
+      setCompaniesData({
+        companies: data,
+        isLoading: false,
+        searchTerm: "",
+      });
+
+    }
     fetchCompaniesData();
   }, []);
 
@@ -103,26 +80,31 @@ function CompanyList() {
     return <div className="CompanyList-loading">Loading...</div>;
   }
 
+  //FIXME: CLEAR the search term when returning to companies list
+
+
   return (
     <div className="CompanyList">
       <SearchForm handleSearch={handleSearch} />
       {companiesData.searchTerm === ""
         ? <h1>All Companies</h1>
-        : <h1>Search results for "{companiesData.searchTerm}"</h1>
+        : <h3>Search results for "{companiesData.searchTerm}"</h3>
       }
 
       {
-        companiesData.errors.length > 0 &&
-        <div><Error errors={companiesData.errors} /></div>
+        companiesData.companies.length === 0
+          ? <p>
+            Sorry, no results found.{' '}
+            <Link to={`/companies/`}>Go back to companies list</Link>
+          </p>
+          : companiesData.companies.map(
+            company => (
+              <Link key={company.handle} to={`/companies/${company.handle}`}>
+                <CompanyCard company={company} />
+              </Link>
+            )
+          )
       }
-
-      {companiesData.companies.map(
-        company => (
-          <Link key={company.handle} to={`/companies/${company.handle}`}>
-            <CompanyCard company={company} />
-          </Link>
-        )
-      )}
 
     </div >
   );
